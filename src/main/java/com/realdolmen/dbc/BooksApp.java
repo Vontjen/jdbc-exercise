@@ -9,8 +9,22 @@ public class BooksApp {
 
         //List<Book> books = dao.findByTitle("game");
         //books.forEach(System.out::println);
+
+
         //System.out.println(dao.findBook(4l));
 
 
+        //List<Book> books = dao.findByAuthor("MAd");
+        //books.forEach(System.out::println);
+
+        //List<Book> books = dao.findAllBooks();
+        //books.forEach(System.out::println);
+
+        //dao.updateBook()
+
+
+
+        }
+
+
     }
-}

@@ -55,6 +55,39 @@ public class BookDAOImpl implements BookDAO {
 
     @Override
     public List<Book> findByAuthor(String author) {
+        try (Connection connection = ConnectionFactory.INSTANCE.getConnection()) {
+
+            PreparedStatement statement = connection.prepareStatement("select id, title, author FROM book WHERE author like ?");
+            statement.setString(1, author+"%");
+            ResultSet resultSet = statement.executeQuery();
+            List<Book> books = new ArrayList<>();
+            while (resultSet.next()){
+                books.add(new Book(resultSet.getInt("id"), resultSet.getString("title"), resultSet.getString("author")));
+            }
+            return books;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public List<Book> findAllBooks() {
+        try (Connection connection = ConnectionFactory.INSTANCE.getConnection()) {
+
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT id, title, author FROM book");
+            List<Book> books = new ArrayList<>();
+            while (resultSet.next()){
+                books.add(new Book(resultSet.getInt("id"), resultSet.getString("title"),resultSet.getString("author")));
+            }
+
+            return books;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
@@ -75,5 +108,23 @@ public class BookDAOImpl implements BookDAO {
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    public int updateBook(Book b) {
+        try (Connection connection = ConnectionFactory.INSTANCE.getConnection()) {
+
+            PreparedStatement statement = connection.prepareStatement("UPDATE book SET title =?, author =? WHERE id = ? ");
+            statement.setString(1,b.getTitle());
+            statement.setString(2,b.getAuthor());
+            statement.setInt(3,b.getId());
+            return statement.executeUpdate();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
     }
 }

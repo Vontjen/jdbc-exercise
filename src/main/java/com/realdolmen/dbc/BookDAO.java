@@ -11,11 +11,11 @@ public interface BookDAO {
 
     List<Book> findByAuthor (String author);
 
-    //List<Book> findAllBooks();
+    List<Book> findAllBooks();
 
     void createBook(Book b);
 
-    //int updateBook(Book b);
+    int updateBook(Book b);
 
     //int deleteBook(Book b);
 
