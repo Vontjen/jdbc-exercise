@@ -2,9 +2,6 @@ package com.realdolmen.dbc;
 
 import java.sql.*;
 
-/**
- * Created by vdabcursist on 07/08/2017.
- */
 public class Exercise {
     public static void main(String[] args) {
         try {
