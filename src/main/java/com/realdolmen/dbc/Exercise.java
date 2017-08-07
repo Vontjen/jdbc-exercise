@@ -1,9 +1,6 @@
 package com.realdolmen.dbc;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 /**
  * Created by vdabcursist on 07/08/2017.
@@ -19,7 +16,21 @@ public class Exercise {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/books","root","root")){
 
             Statement statement = connection.createStatement();
+            statement.execute("DROP TABLE IF EXISTS book");
             statement.execute("CREATE TABLE IF NOT EXISTS book (id INTEGER NOT NULL, title VARCHAR(255), author VARCHAR(255), PRIMARY KEY(id) )");
+            statement.execute("INSERT INTO book VALUES (1, 'The Expanse', 'James SA Corey') ");
+            statement.execute("INSERT INTO book VALUES (2,'Game of Thrones','GRR Martin')");
+
+            ResultSet rs = statement.executeQuery("SELECT id, title, author FROM books.book");
+
+            while(rs.next()){
+                int id = rs.getInt("id");
+                String title = rs.getString("title");
+                String author = rs.getString("author");
+                System.out.printf("%d %s %s%n", id, title, author);
+
+            }
+
 
         } catch (SQLException e) {
             e.printStackTrace();
