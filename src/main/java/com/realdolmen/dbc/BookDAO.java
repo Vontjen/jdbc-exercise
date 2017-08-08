@@ -7,6 +7,8 @@ public interface BookDAO {
 
     Book findBook(Long id);
 
+    List<Book> findByISBN(int isbn);
+
     List<Book> findByTitle(String title);
 
     List<Book> findByAuthor (String author);
@@ -17,7 +19,9 @@ public interface BookDAO {
 
     int updateBook(Book b);
 
-    //int deleteBook(Book b);
+    int deleteBook(Book b);
+
+    List<Book> findByCategory(String category);
 
 }
 

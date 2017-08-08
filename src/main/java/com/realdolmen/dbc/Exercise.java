@@ -14,9 +14,9 @@ public class Exercise {
 
             Statement statement = connection.createStatement();
             statement.execute("DROP TABLE IF EXISTS book");
-            statement.execute("CREATE TABLE IF NOT EXISTS book (id INTEGER NOT NULL, title VARCHAR(255), author VARCHAR(255), PRIMARY KEY(id) )");
-            statement.execute("INSERT INTO book VALUES (1, 'The Expanse', 'James SA Corey') ");
-            statement.execute("INSERT INTO book VALUES (2,'Game of Thrones','GRR Martin')");
+            statement.execute("CREATE TABLE IF NOT EXISTS book (id INTEGER NOT NULL, isbn INTEGER NOT NULL, title VARCHAR(255), author VARCHAR(255),category VARCHAR(255), PRIMARY KEY(id) )");
+            statement.execute("INSERT INTO book VALUES (1,25478997, 'The Expanse', 'James SA Corey', 'fantasy') ");
+            statement.execute("INSERT INTO book VALUES (2,21778999,'Game of Thrones','GRR Martin','fantasy')");
 
             ResultSet rs = statement.executeQuery("SELECT id, title, author FROM books.book");
 
